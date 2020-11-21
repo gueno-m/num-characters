@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 
-import ProviderContext from '../Provider';
+import { ProviderContext } from '../Provider';
 
 import StyleMessage from '../Styles/StyleMessage';
 
@@ -8,8 +8,10 @@ export default function Message(props) {
 
     const [state, dispatch] = useContext(ProviderContext);
     const {message} = state;
-    const [taille, setTaille ] = useState('');
-    const [theme, setTheme ] = useState('');
+    // const {messageColor} = state;
+    // const {messageSize} = state;
+    const [messageSize, setTaille ] = useState('');
+    const [messageColor, setTheme ] = useState('');
 
     const texte = message => message
     .split(' ')
@@ -26,10 +28,12 @@ export default function Message(props) {
     }
 
     function onTailleChange(event) {
+        //     dispatch({type:'SET_SIZE', messageSize: event.target.value});
         setTaille(event.target.value);
     }
 
     function onThemeChange(event) {
+        //     dispatch({type:'SET_COLOR', messageColor: event.target.value});
         setTheme(event.target.value);
     }
 
@@ -48,14 +52,14 @@ export default function Message(props) {
                 
                 <label>Sélectionner la couleur du texte :</label>
 
-                <select name="" onChange={onThemeChange} id=""> 
+                <select value="messageColor" onChange={onThemeChange} id="" defaultValue = "palevioletred"> 
                     <option value="palevioletred">palevioletred</option>
                     <option value="tomato">tomato</option>
                 </select>
 
                 <label>Selectionner la taille du texte :</label>
 
-                <select name="" onChange={onTailleChange} id="">
+                <select value="messageSize"  onChange={onTailleChange} id="">
                     <option value="15 px">15 px</option>
                     <option value="16 px">16 px</option>
                     <option value="17 px">17 px</option>
@@ -74,9 +78,9 @@ export default function Message(props) {
 
                     <p>Nombre total de charactère du texte : <span>{ totalTexte(message) } </span></p>
 
-                    <p>Couleur utilisée : <span>{ theme } </span></p>
+                    <p>Couleur utilisée : <span>{ messageColor } </span></p>
 
-                    <p>Taille de police : <span> { taille }</span> </p>
+                    <p>Taille de police : <span> { messageSize }</span> </p>
                 </div>
             </div>
 

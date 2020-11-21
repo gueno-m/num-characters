@@ -1,21 +1,37 @@
-// import Message from 'Message';
+import { useContext } from 'react';
 
 import StyleRendu from '../Styles/StyleRendu';
 
-// const [messages, setMessages] = React.useState(data);
-
-// function onDelete(messageASupprimer) {
-//     let indice = messages.indexOf(messageASupprimer);
-//     messages.splice(indice, 1);
-//     setMessages([...messages]);
-// }
+import { ProviderContext } from '../Provider';
 
 export default function Rendu(props) {
+
+    const [state, dispatch] = useContext(ProviderContext);
+    const {message} = state;
+    // const {messageColor} = state.messageColors;
+    // const {messageSize} = state.messageSizes;
+    const messages = state.messages.map( message =>
+        <li>{state.messages}</li>
+    );
+
+    console.log(state);
+    // console.log(state.messageColors)
+    // console.log(state.messageSizes)
+
+    // const StyleMessage = {
+    //     color: ${state.messageColors},
+    //     font-siez: ${state.messageSizes},
+    // }
+
     return (
         <StyleRendu>
+            <div>
                 <h2>Liste des messages :</h2>
+                {/* <li style={StyleMessage}>{message}</li> */}
+                <ul>{messages}</ul>
 
                 {/* <button onClick={() => props.onDelete(props.messages)}>Supprimer</button> */}
+            </div>
         </StyleRendu>
     );
 }
